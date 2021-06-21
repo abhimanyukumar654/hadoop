@@ -1,0 +1,37 @@
+sudo rpm -Uhv libtirpc-0.2.4-0.15.el7.x86_64.rpm
+sudo rpm -Uhv libtirpc-devel-0.2.4-0.15.el7.x86_64.rpm
+sudo tar -xvf jdk-8u181-linux-x64.tar.gz -C /opt/
+sudo tar -xvf jdk-8u231-linux-x64.tar.gz -C /opt/
+
+yum install vim -y
+yum install net-tools -y
+yum install nc -y
+yum install tar -y
+yum install zip -y
+yum install unzip -y
+yum instal l httpd -y
+
+
+yum install ntp -y
+
+systemctl enable ntpd
+systemctl status firewalld
+systemctl disable firewalld
+service firewalld stop
+----------------------------------------------------------------
+sestatus
+setenforce 0
+vi /etc/selinux/config
+--------------------------------------------------------------------------------
+cd /etc/alternatives/
+sudo ln -s  /opt/jdk1.8.0_231/bin/java  java
+sudo ln -s /opt/jdk1.8.0_231/bin/javac  javac
+cd
+cd /usr/bin/
+sudo ln -s  /etc/alternatives/java  java
+cd
+vim /etc/security/limits.conf
+*               hard    nofile           65535
+*               soft    nofile           65535
+* hard core 0
+ulimit -a
